@@ -28,6 +28,26 @@ This project does not provide copyrighted media, account bypassing, DRM circumve
 
 ## Run from source
 
-```bash
-pip install yt-dlp
-python gui_downloader.py
+    pip install yt-dlp
+    python gui_downloader.py
+
+## Build
+
+Example PyInstaller command:
+
+    py -m PyInstaller --clean --noconfirm --onedir --windowed --icon "app.ico" --add-data "app.ico;." --name "YT downloader" gui_downloader.py
+
+## Feedback
+
+If you test the app, please include:
+
+- What URL you tested
+- What quality mode you selected
+- What happened
+- The saved log file from the app, if available
+
+## Disclaimer
+
+This software is provided as-is, without warranty of any kind.
+
+The author is not responsible for how the software is used. Use it only where you have the legal right and permission to download or archive media.
