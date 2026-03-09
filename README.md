@@ -4,8 +4,8 @@ Simple Windows GUI for `yt-dlp` built with Tkinter.
 
 ## Download
 
-[Download beta build EN](https://github.com/Butterfly908/yt-downloader/releases/download/v0.1.0-beta/YT.Downloader.v0.1.0-beta.EN.7z)
-[Download beta build RU](https://github.com/Butterfly908/yt-downloader/releases/download/v0.1.0-beta/YT.Downloader.v0.1.0-beta.RU.7z)
+- [English build (EN)](https://github.com/Butterfly908/yt-downloader/releases/download/v0.1.0-beta/YT.Downloader.v0.1.0-beta.EN.7z)
+- [Russian build (RU)](https://github.com/Butterfly908/yt-downloader/releases/download/v0.1.0-beta/YT.Downloader.v0.1.0-beta.RU.7z)
 
 Do not use **Code -> Download ZIP** unless you want the source code.
 
