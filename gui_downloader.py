@@ -28,6 +28,11 @@ LOG_ERROR = "ERROR"
 
 CURRENT_LANG = "en"
 
+SUPPORTED_LANGS = {
+    "Русский": "ru",
+    "English": "en",
+}
+
 TEXTS = {
     "ru": {
         "app_title": "YT downloader",
@@ -74,7 +79,9 @@ TEXTS = {
         "download_stopped": "Загрузка остановлена",
         "unknown_error": "Неизвестная ошибка",
         "ffmpeg_missing_title": "Не найден FFmpeg",
-        "ffmpeg_missing_message": "FFmpeg или FFprobe не найдены. Для объединения видео и аудио нужен ffmpeg.\\n\\nЕсли вы запускаете собранную версию, убедитесь, что ffmpeg.exe и ffprobe.exe попали в папку сборки PyInstaller.\\n\\nЕсли используется новая структура PyInstaller, они могут лежать в папке _internal.",
+        "ffmpeg_missing_message": "FFmpeg или FFprobe не найдены. Для объединения видео и аудио нужен ffmpeg.\n\nЕсли вы запускаете собранную версию, убедитесь, что ffmpeg.exe и ffprobe.exe попали в папку сборки PyInstaller.\n\nЕсли используется новая структура PyInstaller, они могут лежать в папке _internal.",
+        "js_runtime_warning_title": "JavaScript runtime",
+        "js_runtime_warning_message": "Для полного списка качеств YouTube требуется установленный Deno или другой поддерживаемый JavaScript runtime.\n\nПриложение продолжит работать, но часть форматов может отсутствовать.",
         "log_app_started": "Приложение запущено",
         "log_folder_selected": "Выбрана папка: {folder}",
         "log_folder_opened": "Открыта папка: {folder}",
@@ -141,7 +148,9 @@ TEXTS = {
         "download_stopped": "Download stopped",
         "unknown_error": "Unknown error",
         "ffmpeg_missing_title": "FFmpeg not found",
-        "ffmpeg_missing_message": "FFmpeg or FFprobe were not found. FFmpeg is required to merge video and audio streams.\\n\\nIf you are running the packaged build, make sure ffmpeg.exe and ffprobe.exe were included in the PyInstaller output.\\n\\nWith newer PyInstaller layouts, they may be located inside the _internal folder.",
+        "ffmpeg_missing_message": "FFmpeg or FFprobe were not found. FFmpeg is required to merge video and audio streams.\n\nIf you are running the packaged build, make sure ffmpeg.exe and ffprobe.exe were included in the PyInstaller output.\n\nWith newer PyInstaller layouts, they may be located inside the _internal folder.",
+        "js_runtime_warning_title": "JavaScript runtime",
+        "js_runtime_warning_message": "For full YouTube format availability, a supported JavaScript runtime such as Deno is required.\n\nThe app will still work, but some formats may be missing.",
         "log_app_started": "Application started",
         "log_folder_selected": "Folder selected: {folder}",
         "log_folder_opened": "Folder opened: {folder}",
@@ -181,6 +190,8 @@ cancel_event = threading.Event()
 close_requested = False
 
 app_log_lines = []
+
+js_warning_shown = False
 
 
 class DownloadCancelled(Exception):
@@ -521,7 +532,7 @@ def load_formats_worker(url):
 
     ydl_opts = {
         "quiet": True,
-        "no_warnings": True,
+        "no_warnings": False,
         "noplaylist": True,
         "logger": YTDLPLogger(),
     }
@@ -855,16 +866,28 @@ def handle_cancelled():
     messagebox.showinfo(tr("cancel"), tr("download_stopped"))
 
 
+def maybe_show_js_warning(text):
+    global js_warning_shown
+    if js_warning_shown:
+        return
+    lower = text.lower()
+    if "no supported javascript runtime" in lower or "some formats may be missing" in lower:
+        js_warning_shown = True
+        messagebox.showwarning(tr("js_runtime_warning_title"), tr("js_runtime_warning_message"))
+
+
 def handle_error(message):
     error_text = message.get("error_text", tr("unknown_error"))
     set_progress_determinate(0, "#ef4444")
     status_label.config(text=tr("error_status"))
     set_state(APP_STATE_IDLE)
 
-    error_lower = error_text.lower()
-    if "ffmpeg is not installed" in error_lower or "ffprobe and ffmpeg not found" in error_lower or "ffmpeg not found" in error_lower:
+    lower = error_text.lower()
+    if "ffmpeg is not installed" in lower or "ffprobe and ffmpeg not found" in lower or "ffmpeg not found" in lower:
         messagebox.showerror(tr("ffmpeg_missing_title"), tr("ffmpeg_missing_message"))
     else:
+        if "no supported javascript runtime" in lower or "some formats may be missing" in lower:
+            maybe_show_js_warning(error_text)
         messagebox.showerror(tr("error_title"), error_text)
 
 
@@ -872,6 +895,8 @@ def handle_log(message):
     level = message.get("level", LOG_INFO)
     text = message.get("text", "")
     append_log(level, text)
+    if level in (LOG_WARNING, LOG_ERROR):
+        maybe_show_js_warning(text)
 
 
 def process_ui_queue():
@@ -913,12 +938,45 @@ def on_close():
     root.destroy()
 
 
+def rebuild_texts():
+    root.title(tr("app_title"))
+
+    title_label.config(text=tr("title_label"))
+    url_label.config(text=tr("video_url"))
+    check_button.config(text=tr("check_qualities"))
+    mode_title.config(text=tr("quality_mode_title"))
+    simple_radio.config(text=tr("simple_mode"))
+    advanced_radio.config(text=tr("advanced_mode"))
+    quality_label.config(text=tr("available_qualities"))
+    folder_button.config(text=tr("choose_folder"))
+    open_folder_button.config(text=tr("open_folder"))
+    download_button.config(text=tr("download"))
+    cancel_button.config(text=tr("cancel"))
+    save_log_button.config(text=tr("save_log"))
+
+    if not save_folder:
+        folder_label.config(text=tr("folder_not_selected"))
+
+    refresh_quality_list()
+
+
+def on_language_change(event=None):
+    global CURRENT_LANG
+    label = lang_combo.get()
+    code = SUPPORTED_LANGS.get(label, "ru")
+    if code == CURRENT_LANG:
+        return
+    CURRENT_LANG = code
+    rebuild_texts()
+
+
 def build_ui():
     global root
     global url_entry, quality_combo, folder_label, progress_bar, status_label
     global check_button, download_button, cancel_button, folder_button, open_folder_button
     global progress_style, quality_mode, simple_radio, advanced_radio
     global title_label, url_label, mode_title, quality_label, save_log_button
+    global lang_combo
 
     root = tk.Tk()
     root.title(tr("app_title"))
@@ -950,6 +1008,29 @@ def build_ui():
 
     card = tk.Frame(root, bg="#ffffff", bd=0, highlightthickness=0)
     card.place(relx=0.5, rely=0.5, anchor="center", width=650)
+
+    lang_frame = tk.Frame(card, bg="#ffffff")
+    lang_frame.pack(fill="x", padx=34, pady=(12, 0))
+
+    lang_label = tk.Label(
+        lang_frame,
+        text="Язык / Language:",
+        font=("Segoe UI", 9),
+        bg="#ffffff",
+        fg="#6b7280",
+    )
+    lang_label.pack(side="left")
+
+    lang_combo = ttk.Combobox(
+        lang_frame,
+        values=list(SUPPORTED_LANGS.keys()),
+        state="readonly",
+        width=14,
+        font=("Segoe UI", 9),
+    )
+    lang_combo.set("Русский" if CURRENT_LANG == "ru" else "English")
+    lang_combo.bind("<<ComboboxSelected>>", on_language_change)
+    lang_combo.pack(side="left", padx=(8, 0))
 
     title_label = tk.Label(
         card,
