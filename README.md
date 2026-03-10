@@ -22,7 +22,9 @@ You may need 7-Zip or another compatible archive tool to extract the package.
 - Download video or audio
 - Cancel running downloads
 - Save application logs for troubleshooting
-- Separate English and Russian desktop builds
+- In-app language selection (Russian / English) instead of separate EN/RU desktop builds
+- Bundled FFmpeg / FFprobe detection, including support for the newer `_internal` PyInstaller layout
+- Friendly in-app warning if `yt-dlp` reports that no supported JavaScript runtime is available and some YouTube formats may be missing
 
 ## Notes
 
@@ -40,7 +42,7 @@ The packaged Windows builds already include bundled `ffmpeg` / `ffprobe`, so bas
 
 However, some YouTube formats and extraction steps may require a supported external JavaScript runtime used by `yt-dlp`.
 
-If no supported JavaScript runtime is installed, the app may still work, but some formats may be missing from the available quality list.
+If no supported JavaScript runtime is installed, the app will still work, but some formats may be missing from the available quality list. In this case YT Downloader shows a friendly warning explaining the situation (in Russian or English, depending on the selected UI language).
 
 For the best YouTube format availability, install a supported JavaScript runtime in advance.
 
@@ -103,7 +105,7 @@ https://github.com/yt-dlp/yt-dlp/wiki/EJS
 Example PyInstaller command:
 
 ```bash
-`py -m PyInstaller --clean --noconfirm --onedir --windowed --icon "app.ico" --add-data "app.ico;." --add-binary "ffmpeg.exe;." --add-binary "ffprobe.exe;." --name "YT Downloader" gui_downloader.py`
+py -m PyInstaller --clean --noconfirm --onedir --windowed --icon "app.ico" --add-data "app.ico;." --add-binary "ffmpeg.exe;." --add-binary "ffprobe.exe;." --name "YT Downloader" gui_downloader.py
 ```
 
 ## Releases
