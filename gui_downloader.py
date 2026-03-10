@@ -74,7 +74,7 @@ TEXTS = {
         "download_stopped": "Загрузка остановлена",
         "unknown_error": "Неизвестная ошибка",
         "ffmpeg_missing_title": "Не найден FFmpeg",
-        "ffmpeg_missing_message": "FFmpeg не найден. Для объединения видео и аудио нужен ffmpeg.\\n\\nЕсли вы запускаете собранную версию, убедитесь, что ffmpeg.exe и ffprobe.exe лежат рядом с YT downloader.exe.\\n\\nЕсли вы запускаете из исходников, установите FFmpeg или добавьте его в PATH.",
+        "ffmpeg_missing_message": "FFmpeg или FFprobe не найдены. Для объединения видео и аудио нужен ffmpeg.\\n\\nЕсли вы запускаете собранную версию, убедитесь, что ffmpeg.exe и ffprobe.exe попали в папку сборки PyInstaller.\\n\\nЕсли используется новая структура PyInstaller, они могут лежать в папке _internal.",
         "log_app_started": "Приложение запущено",
         "log_folder_selected": "Выбрана папка: {folder}",
         "log_folder_opened": "Открыта папка: {folder}",
@@ -141,7 +141,7 @@ TEXTS = {
         "download_stopped": "Download stopped",
         "unknown_error": "Unknown error",
         "ffmpeg_missing_title": "FFmpeg not found",
-        "ffmpeg_missing_message": "FFmpeg was not found. FFmpeg is required to merge video and audio streams.\\n\\nIf you are running the packaged build, make sure ffmpeg.exe and ffprobe.exe are placed next to YT downloader.exe.\\n\\nIf you are running from source, install FFmpeg or add it to PATH.",
+        "ffmpeg_missing_message": "FFmpeg or FFprobe were not found. FFmpeg is required to merge video and audio streams.\\n\\nIf you are running the packaged build, make sure ffmpeg.exe and ffprobe.exe were included in the PyInstaller output.\\n\\nWith newer PyInstaller layouts, they may be located inside the _internal folder.",
         "log_app_started": "Application started",
         "log_folder_selected": "Folder selected: {folder}",
         "log_folder_opened": "Folder opened: {folder}",
@@ -223,19 +223,35 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 
-def bundled_bin_path(filename):
+def find_bundled_binary(filename):
+    candidates = []
+
     if getattr(sys, "frozen", False):
-        base = os.path.dirname(sys.executable)
+        exe_dir = os.path.dirname(sys.executable)
+        candidates.append(os.path.join(exe_dir, filename))
+        candidates.append(os.path.join(exe_dir, "_internal", filename))
+
+        meipass = getattr(sys, "_MEIPASS", None)
+        if meipass:
+            candidates.append(os.path.join(meipass, filename))
     else:
         base = os.path.dirname(os.path.abspath(__file__))
-    return os.path.join(base, filename)
+        candidates.append(os.path.join(base, filename))
+
+    for path in candidates:
+        if path and os.path.exists(path):
+            return path
+
+    return None
 
 
 def get_ffmpeg_location():
-    ffmpeg_path = bundled_bin_path("ffmpeg.exe")
-    ffprobe_path = bundled_bin_path("ffprobe.exe")
-    if os.path.exists(ffmpeg_path) and os.path.exists(ffprobe_path):
+    ffmpeg_path = find_bundled_binary("ffmpeg.exe")
+    ffprobe_path = find_bundled_binary("ffprobe.exe")
+
+    if ffmpeg_path and ffprobe_path:
         return os.path.dirname(ffmpeg_path)
+
     return None
 
 
@@ -571,7 +587,11 @@ def load_formats_worker(url):
 
         log_message(
             LOG_INFO,
-            tr("log_formats_found", simple_count=len(simple_map), advanced_count=len(advanced_map))
+            tr(
+                "log_formats_found",
+                simple_count=len(simple_map),
+                advanced_count=len(advanced_map)
+            )
         )
         post_ui_message(MSG_FORMATS_LOADED, simple_map=simple_map, advanced_map=advanced_map)
 
@@ -646,11 +666,14 @@ def download_worker(url, save_path, selected_format):
         elif status == "finished":
             if filename:
                 downloaded_filename = filename
-            log_message(LOG_INFO, tr("log_download_stage_finished", filename=filename if filename else tr("untitled")))
+            log_message(
+                LOG_INFO,
+                tr("log_download_stage_finished", filename=filename if filename else tr("untitled"))
+            )
             post_ui_message(MSG_STAGE, text=tr("processing_file"))
 
     logger = YTDLPLogger()
-    ffmpeg_location = get_ffmpeg_location()
+    ffmpeg_dir = get_ffmpeg_location()
 
     if selected_format == "bestaudio":
         outtmpl = os.path.join(save_path, "%(title)s [audio].%(ext)s")
@@ -679,8 +702,8 @@ def download_worker(url, save_path, selected_format):
             "logger": logger,
         }
 
-    if ffmpeg_location:
-        ydl_opts["ffmpeg_location"] = ffmpeg_location
+    if ffmpeg_dir:
+        ydl_opts["ffmpeg_location"] = ffmpeg_dir
 
     try:
         log_message(LOG_INFO, tr("log_download_button_pressed"))
@@ -839,7 +862,7 @@ def handle_error(message):
     set_state(APP_STATE_IDLE)
 
     error_lower = error_text.lower()
-    if "ffmpeg is not installed" in error_lower or "ffmpeg not found" in error_lower:
+    if "ffmpeg is not installed" in error_lower or "ffprobe and ffmpeg not found" in error_lower or "ffmpeg not found" in error_lower:
         messagebox.showerror(tr("ffmpeg_missing_title"), tr("ffmpeg_missing_message"))
     else:
         messagebox.showerror(tr("error_title"), error_text)
@@ -895,6 +918,7 @@ def build_ui():
     global url_entry, quality_combo, folder_label, progress_bar, status_label
     global check_button, download_button, cancel_button, folder_button, open_folder_button
     global progress_style, quality_mode, simple_radio, advanced_radio
+    global title_label, url_label, mode_title, quality_label, save_log_button
 
     root = tk.Tk()
     root.title(tr("app_title"))
