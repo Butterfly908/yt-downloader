@@ -35,9 +35,36 @@ This project does not provide any hosted content, account bypassing, or DRM circ
 
 The packaged Windows builds include bundled `ffmpeg` / `ffprobe` for merging video and audio streams.
 
-Some YouTube formats or extraction steps may still require an external JavaScript runtime supported by `yt-dlp` (for example Deno or Node.js), depending on the current `yt-dlp` version and site changes.
+## Full YouTube format support (optional)
 
-If you see warnings about a missing JavaScript runtime or missing formats, see the official yt-dlp EJS guide:
+The packaged Windows builds already include bundled `ffmpeg` / `ffprobe`, so basic downloading and media merging work without installing FFmpeg separately.
+
+However, some YouTube formats and extraction steps may require a supported external JavaScript runtime used by `yt-dlp`.
+
+If no supported JavaScript runtime is installed, the app may still work, but some formats may be missing from the available quality list.
+
+For the best YouTube format availability, install a supported JavaScript runtime in advance.
+
+Recommended option on Windows: **Deno**
+
+Official installation guide:
+https://docs.deno.com/runtime/getting_started/installation/
+
+Common Windows install options include:
+
+```powershell
+winget install deno
+```
+
+or
+
+```powershell
+irm https://deno.land/install.ps1 | iex
+```
+
+After installation, restart the app and check qualities again.
+
+For more details about JavaScript runtime support in `yt-dlp`, see:
 https://github.com/yt-dlp/yt-dlp/wiki/EJS
 
 ## Requirements
@@ -64,7 +91,7 @@ https://github.com/yt-dlp/yt-dlp/wiki/EJS
 
 2. Make sure `ffmpeg` / `ffprobe` are installed and available in PATH, or placed locally for the app to use.
 
-3. Be aware that some YouTube scenarios may require a supported JavaScript runtime for full format availability.
+3. For full YouTube format availability, install a supported JavaScript runtime such as Deno.
 
 4. Run:
 
