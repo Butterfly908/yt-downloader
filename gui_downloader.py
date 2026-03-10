@@ -26,6 +26,145 @@ LOG_INFO = "INFO"
 LOG_WARNING = "WARNING"
 LOG_ERROR = "ERROR"
 
+CURRENT_LANG = "en"
+
+TEXTS = {
+    "ru": {
+        "app_title": "YT downloader",
+        "title_label": "YT Downloader",
+        "video_url": "Ссылка на видео",
+        "check_qualities": "Проверить качества",
+        "quality_mode_title": "Режим выбора качества",
+        "simple_mode": "Обычный",
+        "advanced_mode": "Продвинутый",
+        "available_qualities": "Доступные качества",
+        "choose_folder": "Выбрать папку",
+        "folder_not_selected": "Папка не выбрана",
+        "open_folder": "Открыть папку",
+        "download": "Скачать",
+        "cancel": "Отмена",
+        "save_log": "Сохранить лог",
+        "ready_to_work": "Готов к работе",
+        "loading_qualities": "Получение доступных качеств...",
+        "qualities_loaded": "Качества загружены",
+        "qualities_error": "Ошибка получения качеств",
+        "preparing": "Подготовка...",
+        "downloading_status": "Скачивание...",
+        "processing_file": "Обработка файла...",
+        "done": "Готово!",
+        "download_cancelled": "Загрузка отменена",
+        "error_status": "Ошибка",
+        "stopping_download": "Остановка загрузки...",
+        "audio_only": "Только аудио (mp3)",
+        "untitled": "Без названия",
+        "log_title": "Лог",
+        "log_empty": "Лог пуст",
+        "save_log_title": "Сохранить лог",
+        "success_title": "Успех",
+        "log_saved": "Лог сохранён",
+        "error_title": "Ошибка",
+        "warning_title": "Внимание",
+        "choose_folder_first": "Сначала выберите папку",
+        "folder_not_found": "Папка не найдена",
+        "enter_video_url": "Введите ссылку на видео",
+        "choose_save_folder": "Выберите папку для сохранения",
+        "click_check_first": "Сначала нажмите 'Проверить качества'",
+        "select_available_quality": "Выберите доступное качество",
+        "download_completed": "Скачивание завершено",
+        "download_stopped": "Загрузка остановлена",
+        "unknown_error": "Неизвестная ошибка",
+        "ffmpeg_missing_title": "Не найден FFmpeg",
+        "ffmpeg_missing_message": "FFmpeg не найден. Для объединения видео и аудио нужен ffmpeg.\\n\\nЕсли вы запускаете собранную версию, убедитесь, что ffmpeg.exe и ffprobe.exe лежат рядом с YT downloader.exe.\\n\\nЕсли вы запускаете из исходников, установите FFmpeg или добавьте его в PATH.",
+        "log_app_started": "Приложение запущено",
+        "log_folder_selected": "Выбрана папка: {folder}",
+        "log_folder_opened": "Открыта папка: {folder}",
+        "log_quality_mode_changed": "Режим качества переключен: {mode}",
+        "log_start_checking": "Старт проверки качеств",
+        "log_requested_quality_check": "Запрошена проверка качеств: {url}",
+        "log_video_info_received": "Получена информация о видео: {title}",
+        "log_formats_found": "Качеств найдено: обычных={simple_count}, продвинутых={advanced_count}",
+        "log_formats_error": "Ошибка получения качеств: {error}",
+        "log_download_button_pressed": "Нажата кнопка Скачать",
+        "log_download_started": "Старт загрузки: {url}",
+        "log_save_folder": "Папка сохранения: {folder}",
+        "log_selected_format": "Выбранный формат: {format_}",
+        "log_prepared_path": "Подготовлен путь: {path}",
+        "log_download_stage_finished": "Этап скачивания завершён: {filename}",
+        "log_download_success": "Загрузка успешно завершена",
+        "log_download_cancelled_after_worker": "Загрузка отменена после завершения worker",
+        "log_user_cancelled": "Пользователь отменил загрузку",
+        "log_download_error": "Ошибка загрузки: {error}",
+        "log_cancel_button_pressed": "Нажата кнопка Отмена",
+    },
+    "en": {
+        "app_title": "YT downloader",
+        "title_label": "YT Downloader",
+        "video_url": "Video URL",
+        "check_qualities": "Check qualities",
+        "quality_mode_title": "Quality selection mode",
+        "simple_mode": "Simple",
+        "advanced_mode": "Advanced",
+        "available_qualities": "Available qualities",
+        "choose_folder": "Choose folder",
+        "folder_not_selected": "No folder selected",
+        "open_folder": "Open folder",
+        "download": "Download",
+        "cancel": "Cancel",
+        "save_log": "Save log",
+        "ready_to_work": "Ready",
+        "loading_qualities": "Loading available qualities...",
+        "qualities_loaded": "Qualities loaded",
+        "qualities_error": "Failed to load qualities",
+        "preparing": "Preparing...",
+        "downloading_status": "Downloading...",
+        "processing_file": "Processing file...",
+        "done": "Done!",
+        "download_cancelled": "Download cancelled",
+        "error_status": "Error",
+        "stopping_download": "Stopping download...",
+        "audio_only": "Audio only (mp3)",
+        "untitled": "Untitled",
+        "log_title": "Log",
+        "log_empty": "Log is empty",
+        "save_log_title": "Save log",
+        "success_title": "Success",
+        "log_saved": "Log saved",
+        "error_title": "Error",
+        "warning_title": "Warning",
+        "choose_folder_first": "Please choose a folder first",
+        "folder_not_found": "Folder not found",
+        "enter_video_url": "Enter a video URL",
+        "choose_save_folder": "Choose a save folder",
+        "click_check_first": "Click 'Check qualities' first",
+        "select_available_quality": "Select an available quality",
+        "download_completed": "Download completed",
+        "download_stopped": "Download stopped",
+        "unknown_error": "Unknown error",
+        "ffmpeg_missing_title": "FFmpeg not found",
+        "ffmpeg_missing_message": "FFmpeg was not found. FFmpeg is required to merge video and audio streams.\\n\\nIf you are running the packaged build, make sure ffmpeg.exe and ffprobe.exe are placed next to YT downloader.exe.\\n\\nIf you are running from source, install FFmpeg or add it to PATH.",
+        "log_app_started": "Application started",
+        "log_folder_selected": "Folder selected: {folder}",
+        "log_folder_opened": "Folder opened: {folder}",
+        "log_quality_mode_changed": "Quality mode changed: {mode}",
+        "log_start_checking": "Started checking qualities",
+        "log_requested_quality_check": "Requested quality check: {url}",
+        "log_video_info_received": "Video info received: {title}",
+        "log_formats_found": "Formats found: simple={simple_count}, advanced={advanced_count}",
+        "log_formats_error": "Failed to load qualities: {error}",
+        "log_download_button_pressed": "Download button pressed",
+        "log_download_started": "Download started: {url}",
+        "log_save_folder": "Save folder: {folder}",
+        "log_selected_format": "Selected format: {format_}",
+        "log_prepared_path": "Prepared path: {path}",
+        "log_download_stage_finished": "Download stage finished: {filename}",
+        "log_download_success": "Download completed successfully",
+        "log_download_cancelled_after_worker": "Download cancelled after worker finished",
+        "log_user_cancelled": "User cancelled the download",
+        "log_download_error": "Download error: {error}",
+        "log_cancel_button_pressed": "Cancel button pressed",
+    }
+}
+
 save_folder = ""
 formats_map = {}
 formats_map_simple = {}
@@ -66,12 +205,38 @@ class YTDLPLogger:
             post_ui_message(MSG_LOG, level=LOG_ERROR, text=str(msg))
 
 
+def tr(key, **kwargs):
+    text = TEXTS.get(CURRENT_LANG, {}).get(key, key)
+    if kwargs:
+        try:
+            return text.format(**kwargs)
+        except Exception:
+            return text
+    return text
+
+
 def resource_path(relative_path):
     try:
         base_path = sys._MEIPASS
     except Exception:
         base_path = os.path.dirname(os.path.abspath(__file__))
     return os.path.join(base_path, relative_path)
+
+
+def bundled_bin_path(filename):
+    if getattr(sys, "frozen", False):
+        base = os.path.dirname(sys.executable)
+    else:
+        base = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(base, filename)
+
+
+def get_ffmpeg_location():
+    ffmpeg_path = bundled_bin_path("ffmpeg.exe")
+    ffprobe_path = bundled_bin_path("ffprobe.exe")
+    if os.path.exists(ffmpeg_path) and os.path.exists(ffprobe_path):
+        return os.path.dirname(ffmpeg_path)
+    return None
 
 
 def extract_height(label):
@@ -104,11 +269,11 @@ def log_message(level, text):
 
 def save_log_to_file():
     if not app_log_lines:
-        messagebox.showinfo("Лог", "Лог пуст")
+        messagebox.showinfo(tr("log_title"), tr("log_empty"))
         return
 
     path = filedialog.asksaveasfilename(
-        title="Сохранить лог",
+        title=tr("save_log_title"),
         defaultextension=".txt",
         filetypes=[("Text files", "*.txt"), ("All files", "*.*")]
     )
@@ -118,9 +283,9 @@ def save_log_to_file():
     try:
         with open(path, "w", encoding="utf-8") as f:
             f.write("\n".join(app_log_lines))
-        messagebox.showinfo("Успех", "Лог сохранён")
+        messagebox.showinfo(tr("success_title"), tr("log_saved"))
     except Exception as e:
-        messagebox.showerror("Ошибка", str(e))
+        messagebox.showerror(tr("error_title"), str(e))
 
 
 def cleanup_temp_by_filename(filename):
@@ -309,34 +474,34 @@ def refresh_quality_list():
 
 def choose_folder():
     global save_folder
-    folder = filedialog.askdirectory(title="Выберите папку")
+    folder = filedialog.askdirectory(title=tr("choose_folder"))
     if folder:
         save_folder = folder
         folder_label.config(text=save_folder)
-        log_message(LOG_INFO, f"Выбрана папка: {save_folder}")
+        log_message(LOG_INFO, tr("log_folder_selected", folder=save_folder))
 
 
 def open_folder():
     if not save_folder:
-        messagebox.showwarning("Внимание", "Сначала выберите папку")
+        messagebox.showwarning(tr("warning_title"), tr("choose_folder_first"))
         return
     if os.path.exists(save_folder):
         os.startfile(save_folder)
-        log_message(LOG_INFO, f"Открыта папка: {save_folder}")
+        log_message(LOG_INFO, tr("log_folder_opened", folder=save_folder))
     else:
-        messagebox.showerror("Ошибка", "Папка не найдена")
+        messagebox.showerror(tr("error_title"), tr("folder_not_found"))
 
 
 def on_quality_mode_change():
     if formats_map_simple or formats_map_advanced:
         refresh_quality_list()
-        log_message(LOG_INFO, f"Режим качества переключен: {quality_mode.get()}")
+        log_message(LOG_INFO, tr("log_quality_mode_changed", mode=quality_mode.get()))
 
 
 def load_formats_worker(url):
-    log_message(LOG_INFO, "Старт проверки качеств")
+    log_message(LOG_INFO, tr("log_start_checking"))
     log_message(LOG_INFO, "-" * 70)
-    log_message(LOG_INFO, f"Запрошена проверка качеств: {url}")
+    log_message(LOG_INFO, tr("log_requested_quality_check", url=url))
 
     ydl_opts = {
         "quiet": True,
@@ -350,8 +515,8 @@ def load_formats_worker(url):
             info = ydl.extract_info(url, download=False)
 
         formats = info.get("formats", [])
-        title = info.get("title", "Без названия")
-        log_message(LOG_INFO, f"Получена информация о видео: {title}")
+        title = info.get("title", tr("untitled"))
+        log_message(LOG_INFO, tr("log_video_info_received", title=title))
 
         advanced_map = {}
         simple_candidates = {}
@@ -384,7 +549,7 @@ def load_formats_worker(url):
                     }
 
             elif vcodec == "none" and not audio_added:
-                advanced_map["Только аудио (mp3)"] = "bestaudio"
+                advanced_map[tr("audio_only")] = "bestaudio"
                 audio_added = True
 
         simple_map = {}
@@ -393,22 +558,25 @@ def load_formats_worker(url):
             simple_map[item["label"]] = item["format_id"]
 
         if audio_added:
-            simple_map["Только аудио (mp3)"] = "bestaudio"
+            simple_map[tr("audio_only")] = "bestaudio"
 
         advanced_map = dict(
             sorted(
                 advanced_map.items(),
                 key=lambda item: (
-                    9999 if item[0] == "Только аудио (mp3)" else -extract_height(item[0])
+                    9999 if item[0] == tr("audio_only") else -extract_height(item[0])
                 )
             )
         )
 
-        log_message(LOG_INFO, f"Качеств найдено: обычных={len(simple_map)}, продвинутых={len(advanced_map)}")
+        log_message(
+            LOG_INFO,
+            tr("log_formats_found", simple_count=len(simple_map), advanced_count=len(advanced_map))
+        )
         post_ui_message(MSG_FORMATS_LOADED, simple_map=simple_map, advanced_map=advanced_map)
 
     except Exception as e:
-        log_message(LOG_ERROR, f"Ошибка получения качеств: {e}")
+        log_message(LOG_ERROR, tr("log_formats_error", error=e))
         post_ui_message(MSG_FORMATS_ERROR, error_text=str(e))
 
 
@@ -417,7 +585,7 @@ def check_formats():
 
     url = url_entry.get().strip()
     if url == "":
-        messagebox.showerror("Ошибка", "Введите ссылку на видео")
+        messagebox.showerror(tr("error_title"), tr("enter_video_url"))
         return
 
     if app_state != APP_STATE_IDLE:
@@ -427,7 +595,7 @@ def check_formats():
     quality_combo.set("")
     quality_combo["values"] = []
     reset_progressbar()
-    status_label.config(text="Получение доступных качеств...")
+    status_label.config(text=tr("loading_qualities"))
     set_state(APP_STATE_CHECKING)
 
     check_thread = threading.Thread(target=load_formats_worker, args=(url,), daemon=True)
@@ -442,7 +610,7 @@ def download_worker(url, save_path, selected_format):
         nonlocal downloaded_filename
 
         if cancel_event.is_set():
-            raise DownloadCancelled("Загрузка отменена пользователем")
+            raise DownloadCancelled(tr("download_cancelled"))
 
         filename = d.get("filename")
         if filename:
@@ -452,7 +620,7 @@ def download_worker(url, save_path, selected_format):
 
         if status == "downloading":
             percent_value = None
-            text = "Скачивание..."
+            text = tr("downloading_status")
 
             downloaded_bytes = d.get("downloaded_bytes")
             total_bytes = d.get("total_bytes") or d.get("total_bytes_estimate")
@@ -468,17 +636,21 @@ def download_worker(url, save_path, selected_format):
             eta = d.get("_eta_str", "...")
 
             if percent_str:
-                text = f"Скачивание... {percent_str} | Скорость: {speed} | Осталось: {eta}"
+                if CURRENT_LANG == "ru":
+                    text = f"Скачивание... {percent_str} | Скорость: {speed} | Осталось: {eta}"
+                else:
+                    text = f"Downloading... {percent_str} | Speed: {speed} | ETA: {eta}"
 
             post_ui_message(MSG_PROGRESS, text=text, percent=percent_value)
 
         elif status == "finished":
             if filename:
                 downloaded_filename = filename
-            log_message(LOG_INFO, f"Этап скачивания завершён: {filename if filename else 'без имени'}")
-            post_ui_message(MSG_STAGE, text="Обработка файла...")
+            log_message(LOG_INFO, tr("log_download_stage_finished", filename=filename if filename else tr("untitled")))
+            post_ui_message(MSG_STAGE, text=tr("processing_file"))
 
     logger = YTDLPLogger()
+    ffmpeg_location = get_ffmpeg_location()
 
     if selected_format == "bestaudio":
         outtmpl = os.path.join(save_path, "%(title)s [audio].%(ext)s")
@@ -507,44 +679,47 @@ def download_worker(url, save_path, selected_format):
             "logger": logger,
         }
 
+    if ffmpeg_location:
+        ydl_opts["ffmpeg_location"] = ffmpeg_location
+
     try:
-        log_message(LOG_INFO, "Нажата кнопка Скачать")
+        log_message(LOG_INFO, tr("log_download_button_pressed"))
         log_message(LOG_INFO, "-" * 70)
-        log_message(LOG_INFO, f"Старт загрузки: {url}")
-        log_message(LOG_INFO, f"Папка сохранения: {save_path}")
-        log_message(LOG_INFO, f"Выбранный формат: {selected_format}")
-        post_ui_message(MSG_STAGE, text="Подготовка...")
+        log_message(LOG_INFO, tr("log_download_started", url=url))
+        log_message(LOG_INFO, tr("log_save_folder", folder=save_path))
+        log_message(LOG_INFO, tr("log_selected_format", format_=selected_format))
+        post_ui_message(MSG_STAGE, text=tr("preparing"))
 
         with YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(url, download=False)
             prepared_name = ydl.prepare_filename(info)
-            log_message(LOG_INFO, f"Подготовлен путь: {prepared_name}")
+            log_message(LOG_INFO, tr("log_prepared_path", path=prepared_name))
 
             if cancel_event.is_set():
-                raise DownloadCancelled("Загрузка отменена пользователем")
+                raise DownloadCancelled(tr("download_cancelled"))
 
             ydl.download([url])
 
         if cancel_event.is_set():
             cleanup_temp_by_filename(downloaded_filename)
             cleanup_temp_by_filename(prepared_name)
-            log_message(LOG_WARNING, "Загрузка отменена после завершения worker")
+            log_message(LOG_WARNING, tr("log_download_cancelled_after_worker"))
             post_ui_message(MSG_CANCELLED)
             return
 
-        log_message(LOG_INFO, "Загрузка успешно завершена")
+        log_message(LOG_INFO, tr("log_download_success"))
         post_ui_message(MSG_FINISHED)
 
     except DownloadCancelled:
         cleanup_temp_by_filename(downloaded_filename)
         cleanup_temp_by_filename(prepared_name)
-        log_message(LOG_WARNING, "Пользователь отменил загрузку")
+        log_message(LOG_WARNING, tr("log_user_cancelled"))
         post_ui_message(MSG_CANCELLED)
 
     except Exception as e:
         cleanup_temp_by_filename(downloaded_filename)
         cleanup_temp_by_filename(prepared_name)
-        log_message(LOG_ERROR, f"Ошибка загрузки: {e}")
+        log_message(LOG_ERROR, tr("log_download_error", error=e))
         post_ui_message(MSG_ERROR, error_text=str(e))
 
 
@@ -555,19 +730,19 @@ def start_download():
     selected_label = quality_combo.get()
 
     if url == "":
-        messagebox.showerror("Ошибка", "Введите ссылку на видео")
+        messagebox.showerror(tr("error_title"), tr("enter_video_url"))
         return
 
     if save_folder == "":
-        messagebox.showerror("Ошибка", "Выберите папку для сохранения")
+        messagebox.showerror(tr("error_title"), tr("choose_save_folder"))
         return
 
     if selected_label == "":
-        messagebox.showerror("Ошибка", "Сначала нажмите 'Проверить качества'")
+        messagebox.showerror(tr("error_title"), tr("click_check_first"))
         return
 
     if selected_label not in formats_map:
-        messagebox.showerror("Ошибка", "Выберите доступное качество")
+        messagebox.showerror(tr("error_title"), tr("select_available_quality"))
         return
 
     if app_state != APP_STATE_IDLE:
@@ -576,7 +751,7 @@ def start_download():
     cancel_event.clear()
     reset_progressbar()
     set_progress_indeterminate("#3b82f6")
-    status_label.config(text="Подготовка...")
+    status_label.config(text=tr("preparing"))
     set_state(APP_STATE_DOWNLOADING)
 
     selected_format = formats_map[selected_label]
@@ -593,8 +768,8 @@ def cancel_download():
         return
 
     cancel_event.set()
-    log_message(LOG_WARNING, "Нажата кнопка Отмена")
-    status_label.config(text="Остановка загрузки...")
+    log_message(LOG_WARNING, tr("log_cancel_button_pressed"))
+    status_label.config(text=tr("stopping_download"))
     set_progress_indeterminate("#ef4444")
     set_state(APP_STATE_CANCELLING)
 
@@ -607,7 +782,7 @@ def handle_formats_loaded(message):
     formats_map_advanced = message["advanced_map"]
 
     refresh_quality_list()
-    status_label.config(text="Качества загружены")
+    status_label.config(text=tr("qualities_loaded"))
     reset_progressbar()
     set_state(APP_STATE_IDLE)
 
@@ -619,14 +794,14 @@ def handle_formats_error(message):
     quality_combo.set("")
     quality_combo["values"] = []
     reset_progressbar()
-    status_label.config(text="Ошибка получения качеств")
+    status_label.config(text=tr("qualities_error"))
     set_state(APP_STATE_IDLE)
     download_button.config(state="disabled", bg="#93c5fd", activebackground="#93c5fd")
-    messagebox.showerror("Ошибка", message.get("error_text", "Неизвестная ошибка"))
+    messagebox.showerror(tr("error_title"), message.get("error_text", tr("unknown_error")))
 
 
 def handle_progress(message):
-    text = message.get("text", "Скачивание...")
+    text = message.get("text", tr("downloading_status"))
     percent = message.get("percent")
 
     status_label.config(text=text)
@@ -638,30 +813,36 @@ def handle_progress(message):
 
 
 def handle_stage(message):
-    text = message.get("text", "Обработка файла...")
+    text = message.get("text", tr("processing_file"))
     status_label.config(text=text)
     set_progress_indeterminate("#3b82f6")
 
 
 def handle_finished():
     set_progress_determinate(100, "#22c55e")
-    status_label.config(text="Готово!")
+    status_label.config(text=tr("done"))
     set_state(APP_STATE_IDLE)
-    messagebox.showinfo("Успех", "Скачивание завершено")
+    messagebox.showinfo(tr("success_title"), tr("download_completed"))
 
 
 def handle_cancelled():
     set_progress_determinate(0, "#ef4444")
-    status_label.config(text="Загрузка отменена")
+    status_label.config(text=tr("download_cancelled"))
     set_state(APP_STATE_IDLE)
-    messagebox.showinfo("Отмена", "Загрузка остановлена")
+    messagebox.showinfo(tr("cancel"), tr("download_stopped"))
 
 
 def handle_error(message):
+    error_text = message.get("error_text", tr("unknown_error"))
     set_progress_determinate(0, "#ef4444")
-    status_label.config(text="Ошибка")
+    status_label.config(text=tr("error_status"))
     set_state(APP_STATE_IDLE)
-    messagebox.showerror("Ошибка", message.get("error_text", "Неизвестная ошибка"))
+
+    error_lower = error_text.lower()
+    if "ffmpeg is not installed" in error_lower or "ffmpeg not found" in error_lower:
+        messagebox.showerror(tr("ffmpeg_missing_title"), tr("ffmpeg_missing_message"))
+    else:
+        messagebox.showerror(tr("error_title"), error_text)
 
 
 def handle_log(message):
@@ -716,7 +897,7 @@ def build_ui():
     global progress_style, quality_mode, simple_radio, advanced_radio
 
     root = tk.Tk()
-    root.title("YT downloader")
+    root.title(tr("app_title"))
     root.geometry("860x860")
     root.minsize(860, 860)
     root.configure(bg="#eef2f7")
@@ -748,7 +929,7 @@ def build_ui():
 
     title_label = tk.Label(
         card,
-        text="YT Downloader",
+        text=tr("title_label"),
         font=("Segoe UI", 28, "bold"),
         bg="#ffffff",
         fg="#111827"
@@ -757,7 +938,7 @@ def build_ui():
 
     url_label = tk.Label(
         card,
-        text="Ссылка на видео",
+        text=tr("video_url"),
         font=("Segoe UI", 11, "bold"),
         bg="#ffffff",
         fg="#374151",
@@ -770,7 +951,7 @@ def build_ui():
 
     check_button = tk.Button(
         card,
-        text="Проверить качества",
+        text=tr("check_qualities"),
         command=check_formats,
         font=("Segoe UI", 11),
         bg="#e5e7eb",
@@ -785,7 +966,7 @@ def build_ui():
 
     mode_title = tk.Label(
         card,
-        text="Режим выбора качества",
+        text=tr("quality_mode_title"),
         font=("Segoe UI", 10, "bold"),
         bg="#ffffff",
         fg="#374151",
@@ -800,7 +981,7 @@ def build_ui():
 
     simple_radio = tk.Radiobutton(
         mode_frame,
-        text="Обычный",
+        text=tr("simple_mode"),
         variable=quality_mode,
         value="simple",
         command=on_quality_mode_change,
@@ -815,7 +996,7 @@ def build_ui():
 
     advanced_radio = tk.Radiobutton(
         mode_frame,
-        text="Продвинутый",
+        text=tr("advanced_mode"),
         variable=quality_mode,
         value="advanced",
         command=on_quality_mode_change,
@@ -830,7 +1011,7 @@ def build_ui():
 
     quality_label = tk.Label(
         card,
-        text="Доступные качества",
+        text=tr("available_qualities"),
         font=("Segoe UI", 11, "bold"),
         bg="#ffffff",
         fg="#374151",
@@ -843,7 +1024,7 @@ def build_ui():
 
     folder_button = tk.Button(
         card,
-        text="Выбрать папку",
+        text=tr("choose_folder"),
         command=choose_folder,
         font=("Segoe UI", 11),
         bg="#e5e7eb",
@@ -858,7 +1039,7 @@ def build_ui():
 
     folder_label = tk.Label(
         card,
-        text="Папка не выбрана",
+        text=tr("folder_not_selected"),
         font=("Segoe UI", 10),
         bg="#ffffff",
         fg="#1f2937",
@@ -869,7 +1050,7 @@ def build_ui():
 
     open_folder_button = tk.Button(
         card,
-        text="Открыть папку",
+        text=tr("open_folder"),
         command=open_folder,
         font=("Segoe UI", 11),
         bg="#e5e7eb",
@@ -884,7 +1065,7 @@ def build_ui():
 
     download_button = tk.Button(
         card,
-        text="Скачать",
+        text=tr("download"),
         command=start_download,
         font=("Segoe UI", 12, "bold"),
         bg="#93c5fd",
@@ -900,7 +1081,7 @@ def build_ui():
 
     cancel_button = tk.Button(
         card,
-        text="Отмена",
+        text=tr("cancel"),
         command=cancel_download,
         font=("Segoe UI", 12, "bold"),
         bg="#f3b0b0",
@@ -925,7 +1106,7 @@ def build_ui():
 
     status_label = tk.Label(
         card,
-        text="Готов к работе",
+        text=tr("ready_to_work"),
         font=("Segoe UI", 10),
         bg="#ffffff",
         fg="#6b7280"
@@ -934,7 +1115,7 @@ def build_ui():
 
     save_log_button = tk.Button(
         card,
-        text="Сохранить лог",
+        text=tr("save_log"),
         command=save_log_to_file,
         font=("Segoe UI", 10),
         bg="#e5e7eb",
@@ -949,7 +1130,7 @@ def build_ui():
 
     reset_progressbar()
     set_state(APP_STATE_IDLE)
-    append_log(LOG_INFO, "Приложение запущено")
+    append_log(LOG_INFO, tr("log_app_started"))
     root.after(100, process_ui_queue)
     root.mainloop()
 
