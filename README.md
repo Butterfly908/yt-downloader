@@ -103,7 +103,7 @@ https://github.com/yt-dlp/yt-dlp/wiki/EJS
 Example PyInstaller command:
 
 ```bash
-py -m PyInstaller --clean --noconfirm --onedir --windowed --icon "app.ico" --add-data "app.ico;." --add-binary "ffmpeg.exe;." --add-binary "ffprobe.exe;." --name "YT downloader" gui_downloader.py
+`py -m PyInstaller --clean --noconfirm --onedir --windowed --icon "app.ico" --add-data "app.ico;." --add-binary "ffmpeg.exe;." --add-binary "ffprobe.exe;." --name "YT Downloader" gui_downloader.py`
 ```
 
 ## Releases
